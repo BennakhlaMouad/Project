@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h2>Modifier un Parfum :</h2>
+
+  <form>
+    <div class="col-sm-2 mb-2">
+      <label>ID Parfum</label>
+      <input readonly type="text" [(ngModel)]="currentParfum.idParfum"
+             name="idParfum" class="form-control">
+    </div>
+
+    <div class="col-sm-4 mb-2">
+      <label>Nom Parfum</label>
+      <input type="text" [(ngModel)]="currentParfum.nomParfum"
+             name="nomParfum" class="form-control">
+    </div>
+
+    <div class="col-sm-2 mb-2">
+      <label>Prix Parfum</label>
+      <input type="number" [(ngModel)]="currentParfum.prixParfum"
+             name="prixParfum" class="form-control">
+    </div>
+
+    <div class="col-sm-4 mb-2">
+      <label>Date création</label>
+      <input type="date"
+             [ngModel]="currentParfum.dateCreation | date:'yyyy-MM-dd'"
+             (ngModelChange)="currentParfum.dateCreation = $event"
+             name="dateCreation" class="form-control">
+    </div>
+    <div class="col-sm-4 mb-2">
+  <label>Genre</label>
+  <select class="form-control" name="idGenre" [(ngModel)]="updatedGenreId">
+    @for(g of genres; track g.idGenre) {
+      <option [value]="g.idGenre"> {{g.nomGenre}} </option>
+    }
+  </select>
+</div>
+
+    <div class="mt-2">
+      <button type="submit" (click)="updateParfum()" class="btn btn-success">Modifier</button>
+    </div>
+  </form>
+</div>

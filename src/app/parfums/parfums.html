@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      
+      <div class="row mb-4">
+        <div class="col-sm-4">
+          <label>Recherche par Genre :</label>
+          <select class="form-control" name="idGenreRecherche" [(ngModel)]="idGenreRecherche" (ngModelChange)="onChange()">
+            <option value="" disabled>--- Choisissez un Genre ---</option>
+            @for(g of genres; track g.idGenre) {
+              <option [value]="g.idGenre"> {{g.nomGenre}} </option>
+            }
+          </select>
+        </div>
+
+        <div class="col-sm-4">
+          <label>Recherche par Nom :</label>
+          <input type="text" class="form-control" name="nomParfumRecherche" [(ngModel)]="nomParfumRecherche" (ngModelChange)="rechercherParNom()" placeholder="Taper le nom du parfum...">
+        </div>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Date Création</th>
+            <th>Genre</th>
+            @if(authService.isAdmin()) {
+              <th></th>
+              <th></th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (parfum of parfums; track parfum.idParfum; let index = $index) {
+            <tr>
+              <td>{{ index }}</td>
+              <td>{{ parfum.idParfum }}</td>
+              <td>{{ parfum.nomParfum }}</td>
+              <td>{{ parfum.prixParfum }}</td>
+              <td>{{ parfum.dateCreation | date:'dd/MM/yyyy' }}</td>
+              <td>{{ parfum.genre.nomGenre }}</td>
+              
+              <!-- Buttons restricted to ADMIN -->
+              @if(authService.isAdmin()) {
+                <td>
+                  <a class="btn btn-success" [routerLink]="['/updateParfum', parfum.idParfum]">Modifier</a>
+                </td>
+                <td>
+                  <button class="btn btn-danger ms-2" (click)="supprimeParfum(parfum)">Supprimer</button>
+                </td>
+              }
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="8" class="text-center text-muted">Aucun parfum trouvé !</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

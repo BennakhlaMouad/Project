@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>Ajouter un Produit :</h2>
+  <form>
+    <div class="col-sm-2">
+      <label>ID Produit</label>
+      <input type="number" [(ngModel)]="newParfum.idParfum" name="idProduit" class="form-control">
+    </div>
+    <div class="col-sm-4">
+      <label>Nom Produit</label>
+      <input type="text" [(ngModel)]="newParfum.nomParfum" name="nomProduit" class="form-control">
+    </div>
+    <div class="col-sm-2">
+      <label>Prix Produit</label>
+      <input type="number" [(ngModel)]="newParfum.prixParfum" name="prixProduit" class="form-control">
+    </div>
+    <div class="col-sm-4">
+      <label>Date création</label>
+      <input type="date" [(ngModel)]="newParfum.dateCreation" name="dateCreation" class="form-control">
+    </div>
+    <div class="col-sm-4 mt-2">
+  <label>Genre</label>
+  <select class="form-control" id="idGenre" name="idGenre" [(ngModel)]="newIdGenre">
+    @for(g of genres; track g.idGenre) {
+      <option [value]="g.idGenre"> {{g.nomGenre}} </option>
+    }
+  </select>
+</div>
+    <div class="mt-2">
+      <button type="submit" (click)="addParfum()" class="btn btn-success">Ajouter</button>
+    </div>
+  </form>
+</div>
